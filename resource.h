@@ -48,22 +48,8 @@ namespace resource {
 		
 		static const std::string map_dir_path = ".\\data\\maps\\";
 
-		static const std::string texture_names[MAX_TEXTURE] = {
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"ALMAKORTESZILVASPRITE",
-			"SPRITE2",
-			"SPAWNPLACE",
-			"ENDLEVELBUTTON",
-			"EGESZENMAS",
-			"BOX_TEXTURE"
-		};
-
+		
+	
 //		static TextureManager*  myTextureManager;
 #endif
 	}
@@ -142,6 +128,45 @@ namespace resource {
 			
 
 		};
+		class TextureNames {
+		private:
+			static TextureNames* s_instance;
+			std::vector<std::string> texture_names;
+			TextureNames() 
+			{
+				
+				ifstream file;
+				file.open("./textures.txt");
+
+				while(!file.eof() && file.is_open()) {
+					stringstream is;
+					string str;
+						getline(file,str);
+						is << str.substr(str.find(" ")+1);
+						texture_names.push_back(is.str());
+					}
+			}
+
+		public:
+			static TextureNames* instance() {
+				if(s_instance ==NULL) {
+					s_instance = new TextureNames();
+				}
+				return s_instance;
+			}
+			const std::string& const operator[](const int i) {
+				if(i < texture_names.size() &&
+					i >= 0) {
+				return texture_names[i];
+				} else {
+					throw  "HIBA";
+				}
+			}
+			int size() {return texture_names.size();}
+			
+
+		};
+
 
 #endif
 
@@ -151,6 +176,7 @@ namespace resource {
 	static resource::objects::GlobalTexture* globalTexture = NULL;
 	static resource::objects::GlobalTextManager* globalTextManager = NULL;
 	static resource::objects::GlobalInfoManager* globalInfoManager = NULL;
+	static resource::objects::TextureNames*		globalTextureNames = NULL;
 #endif
 
 

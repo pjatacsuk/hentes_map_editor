@@ -31,9 +31,12 @@ void SaveToEngine::SaveStart() {
 					  if(strcmp(tmp_pointer,"new_map") == 0){
 					  tmp_pointer =strstr(ent->d_name,tmp_pointer);
 					  if(tmp_pointer != NULL){
-					  
-						  tmp_pointer += strlen("new_map");
-						  int number = atoi(tmp_pointer);
+					     
+						  tmp_pointer += strlen("new_map");	
+						  char* tmp_char = new char[strlen(tmp_pointer)];
+						  strcpy(tmp_char,tmp_pointer);
+						  strtok(tmp_char,".");
+						  int number = atoi(tmp_char);
 						  if(number > max_number) max_number = number;
 					
 					  }
@@ -43,7 +46,7 @@ void SaveToEngine::SaveStart() {
 	  }
 
 						 stringstream os;
-						 os << resource::consts::map_dir_path << "new_map" << ++max_number;
+						 os << resource::consts::map_dir_path << "new_map" << ++max_number <<".map";
 					  mapname = std::string(os.str());
 	  closedir (dir);
 	} else {

@@ -86,7 +86,7 @@ void InfoManager::UpdateString(const sf::Vector2<float>& offSet,const int& mouse
 	mouseString.SetPosition(resource::consts::SCREEN_WIDTH - mouseString.GetRect().GetWidth(),
 							resource::consts::SCREEN_HEIGHT - mouseString.GetRect().GetHeight());
 
-	textureString.SetText(resource::consts::texture_names[block_type]);
+	textureString.SetText((*resource::globalTextureNames->instance())[block_type]);
 	textureString.SetPosition(0 + 2,resource::consts::SCREEN_HEIGHT - textureString.GetRect().GetHeight() - 1);
 
 	ReInitSprites();

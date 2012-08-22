@@ -9,7 +9,7 @@
 #include "InfoManager.h"
 using namespace resource::consts;
 
-RectangleBlock::RectangleBlock(sf::Shape r,int type,TextureManager* textureManager,bool render_info):
+RectangleBlock::RectangleBlock(sf::Shape r,int type,TextureManager* textureManager,bool render_info,bool ForEngineFlag):
 rect(r),
 Entity(0),
 defType(type),
@@ -31,7 +31,7 @@ renderInfoFlag(render_info){
 	hit[3] = true;
 
 	
-
+	if(ForEngineFlag == true)
 	SetDataForEngine(EngineType);
 	
 	

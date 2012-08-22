@@ -54,7 +54,7 @@ std::string PlatformData::SerializeForEngine() {
 		os << parent->rect.GetPointPosition(DownRight).y - parent->rect.GetPointPosition(UpRight).y		<< " ";	//height
 		os << parent->hit[LEFT]		<< " " <<  parent->hit[UP]		<< " "
 		   << parent->hit[RIGHT]	<< " " << parent->hit[DOWN]		<< " ";										//falak
-		os << texture_names[parent->defType]		<< " ";																		//spriteID
+		os << (*resource::globalTextureNames->instance())[parent->defType]		<< " ";																		//spriteID
 		sf::Vector2<float> sprite_pos = Transform(parent->sprite->GetPosition() +
 			sf::Vector2<float>(0,parent->sprite->GetSize().y));
 		os << sprite_pos.x					<< " " <<	sprite_pos.y					 << " ";				//sprite x y

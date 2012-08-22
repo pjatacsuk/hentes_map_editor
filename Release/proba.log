@@ -1,9 +1,10 @@
-﻿Build started 2012.08.12. 16:34:27.
+﻿Build started 2012.08.21. 17:48:04.
      1>Project "C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\proba\proba.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release\proba.unsuccessfulbuild".
+         Creating "Release\proba.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_DYNAMIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -41,40 +42,9 @@
          Finished generating code
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Release\proba.exe.embed.manifest" /manifest Release\proba.exe.intermediate.manifest
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Release\proba.exe.embed.manifest.res" Release\proba_manifest.rc 
+         All outputs are up-to-date.
        LinkEmbedManifest:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\Release\proba.exe" /INCREMENTAL /NOLOGO "sfml-system.lib" "sfml-graphics.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\proba.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\Release\proba.pdb" /SUBSYSTEM:CONSOLE /OPT:NOREF /OPT:NOICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\Release\proba.lib" /MACHINE:X86 Release\proba.exe.embed.manifest.res
-         Release\AmmoData.obj
-         Release\Block.obj
-         Release\Button.obj
-         Release\ButtonManager.obj
-         Release\CirculaTextureSelect.obj
-         Release\Editor.obj
-         Release\EntitiyManager.obj
-         Release\Entity.obj
-         Release\Font.obj
-         Release\FontManager.obj
-         Release\Game.obj
-         Release\GatewayData.obj
-         Release\InfoManager.obj
-         Release\main.obj
-         Release\Map.obj
-         Release\Menu.obj
-         Release\MonsterData.obj
-         Release\PlatformData.obj
-         Release\RectangleBlock.obj
-         Release\resource.obj
-         Release\SaveToEngine.obj
-         Release\TextureManager.obj
-         Release\WeaponData.obj
-         AmmoData.obj : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
-     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
-         Generating code
-     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\entitiymanager.cpp(48): warning C4715: 'EntityManagerTypes::EntityManager::Get' : not all control paths return a value
-     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\buttonmanager.cpp(203): warning C4715: 'ButtonManager::operator[]' : not all control paths return a value
-     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\map.cpp(104): warning C4715: 'Map::OnRightClick' : not all control paths return a value
-     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(117): warning C4715: 'Menu::Loop' : not all control paths return a value
-         Finished generating code
+         All outputs are up-to-date.
          proba.vcxproj -> C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\Release\proba.exe
        FinalizeBuildStatus:
          Deleting file "Release\proba.unsuccessfulbuild".
@@ -83,4 +53,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.50
+Time Elapsed 00:00:11.13
