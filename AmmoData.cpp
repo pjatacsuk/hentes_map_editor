@@ -1,6 +1,7 @@
 #include "AmmoData.h"
 #include "RectangleBlock.h"
 
+
 AmmoData::AmmoData():
 DataForEngine(2)
 {
@@ -52,6 +53,7 @@ void	AmmoData::CallBack(int index,int value) {
 	}
 	if(index == buttonManager->GetSize()) {
 		parent->SetDataForEngine(value);
+	
 	}
 
 }
@@ -74,7 +76,11 @@ void	AmmoData::SetButtonManager(ButtonManager* bman) {
 
 	subBman->Add(WEAPONTYPE,"2",this);
 	subBman->GetLast().SetValue(2);
-
+	//weapontype kijelzõ
+	subBman->GetLast().AddButtonManager();
+	subBman->GetLast().GetButtonManager()->Add(WEAPONTYPE,"",this);
+	subBman->GetLast().GetButtonManager()->GetLast().SetValue(attributes[WEAPONTYPE]);
+	subBman->GetLast().GetButtonManager()->GetLast().dynamic = true;
 	
 	/*buttonManager->GetLast().AddButtonManager();
 	subBman = buttonManager->GetLast().GetButtonManager();
@@ -117,4 +123,22 @@ void	AmmoData::AddChangeTypeMenu() {
 
 	bman->Add(index,"Gateway",this);
 	bman->GetLast().SetValue(GATEWAY);
+}
+
+void AmmoData::deSerialize(std::string line) {
+	char tmpname[50];
+	int pos[2];
+	int weapon_type;
+	int amount;
+
+	sscanf(line.c_str(),"%s %d %d %d %d",&tmpname,&pos[0],&pos[1],&weapon_type,&amount);
+	attributes[AMOUNT] = amount;
+	attributes[WEAPONTYPE] = weapon_type;
+
+	parent->sprite = new sf::Sprite();
+	parent->sprite->SetPosition(pos[0],pos[1]);
+	
+	/** temp megoldás TODO: rendes **/
+	
+	parent->defType = attributes[WEAPONTYPE];
 }

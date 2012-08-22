@@ -7,7 +7,10 @@ DataForEngine(1)
 		for(int i=0;i<attribute_count;i++) {
 		attributes[i] = 0;
 	}
-	name = "SPAWN";
+	name = "SPAWNPLACE";
+//	parent->sprite = new sf::Sprite();
+//	parent->sprite->SetImage(resource::globalTexture->instance()->GetTexture(GetSpriteID("SPAWNPLACE")));
+	
 }
 
 GatewayData::~GatewayData() {
@@ -41,8 +44,11 @@ void	GatewayData::CallBack(int index, int value) {
 	if(index == GATEWAYTYPE) {
 		if(value == SPAWN) {
 			name = "SPAWNPLACE";
+			parent->sprite->SetImage(resource::globalTexture->instance()->GetTexture(GetSpriteID("SPAWNPLACE")));
+			
 		} else if(value == END) {
 			name = "ENDLEVELBUTTON";
+			parent->sprite->SetImage(resource::globalTexture->instance()->GetTexture(GetSpriteID("ENDLEVELBUTTON")));
 		}
 	}
 
@@ -91,4 +97,20 @@ void	GatewayData::AddChangeTypeMenu() {
 
 	bman->Add(index,"Ammo",this);
 	bman->GetLast().SetValue(AMMO);
+}
+
+void GatewayData::deSerialize(std::string line) {
+	int pos[2];
+	char tmpname[100];
+	sscanf(line.c_str(),"%s %d %d",&tmpname,&pos[0],&pos[1]);
+	if(parent->sprite != NULL)	parent->sprite = new sf::Sprite();
+		parent->sprite->SetPosition(pos[0],pos[1]);
+	if(strcmp(tmpname,"SPAWNPLACE") == 0) {
+		parent->defType = GetSpriteID(tmpname);
+		name = "SPAWNPLACE";
+	}
+	if(strcmp(tmpname,"ENDLEVELBUTTON") == 0) {
+		parent->defType = GetSpriteID(tmpname);
+		name = "ENDLEVELBUTTON";
+	}
 }

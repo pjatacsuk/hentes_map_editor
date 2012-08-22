@@ -11,11 +11,11 @@ Entity::Entity(int id):_ID(id) {
 Entity::~Entity() {
 
 }
-/*
+
 bool Entity::operator<(const Entity* entity) {
 	return false;
 }
-*/
+
 bool Entity::operator==(const Entity* entity) {
 	return _ID == entity->_ID;
 }

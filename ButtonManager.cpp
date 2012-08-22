@@ -21,10 +21,10 @@ top_left(b.top_left){
 
 void	ButtonManager::Add(std::string str) {
 		
-		
-	buttons.push_back(Button(sf::Vector2<float>(top_left.x,
+	Button tmp = Button(sf::Vector2<float>(top_left.x,
 							 top_left.y + BUTTON_HEIGHT * buttons.size()),
-							 str));
+							 str);
+	buttons.push_back(tmp);
 
 	rect = sf::Rect<float>(top_left.x,
 						   top_left.y,

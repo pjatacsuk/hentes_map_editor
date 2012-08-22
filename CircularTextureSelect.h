@@ -4,7 +4,7 @@
 #define INC_CTS_H
 #define PI 3.14159265
 
-static const int MAX_TEXTURE_PER_CIRCLE = 6;
+static const int MAX_TEXTURE_PER_CIRCLE = 24;
 class CircularTextureSelect {
 private:
 	TextureManager* _textureManager;

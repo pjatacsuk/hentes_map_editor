@@ -1,7 +1,6 @@
 #ifndef INC_GAMEPLAY_H
 #define INC_GAMEPLAY_H
 #include "Player.h"
-#include "TextManager.h"
 #include "TextureManager.h"
 #include "Map.h"
 #include "resource.h"

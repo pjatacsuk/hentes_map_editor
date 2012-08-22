@@ -10,20 +10,17 @@ private:
 	bool				running;
 	sf::RenderWindow*    App;
 	Map*				map;
-	EntityManager*		entityManager;
 	status				game_status;
 	TextureManager*		textureManager;
+	std::string			map_path;
+	
 public:
 	Game();
 	~Game();
 
 	void	Init_Game();
-	void	Load_Map(std::string map_source);
-	void 	Free_Game();
 	void	GameLoop();
 	void	GameMenu();
-	void	GamePlay();
 	void	GameEditor();
-	void	MapChoose();
 
 };

@@ -4,34 +4,27 @@
 #include <fstream>
 #include "TextureManager.h"
 #include "RectangleBlock.h"
-Map::Map(std::string source) {
+using namespace mapname;
+Map::Map(std::string source,TextureManager* textureManager):
+sortFlag(false)
+{
 	blocks = new EntityManager();
-	fstream file;
-	file.open(source,fstream::in);
-	std::string line;
-	while(file.eof() != true && getline(file,line)) {
-		char* tmp = new char[line.size()+1];
-		strcpy(tmp,line.c_str());
-		
-		tmp = strtok(tmp," ");
-		int type = atoi(tmp);
-		if(type==1) {
-//		Block* blck = new Block();
-//		blck->deSerialize(line);
-//		blocks->Push(blck);
-		} else if(type==2) {
-			RectangleBlock* rblck = new RectangleBlock();
-			rblck->deSerialize(line);
-			blocks->Push(rblck);
-		}
+	for(int i=0;i<5;i++) block_count[i]  = 0;	
+	OpenMapFromFile(source,textureManager);
 
-		
-		delete[] tmp;
-	}
-	
+	//blocks->Sort();
+/*	//elsõ block ->sort miatt a legbaloldalibb
+	cornerBlocks[mapname::LEFT] = cornerBlocks[TOPLEFT] = dynamic_cast<RectangleBlock*>(*(blocks->begin()))->GetSprite()->GetPosition();
+	//utsó block -> sort miatt a legjobboldalibb
+	cornerBlocks[mapname::RIGHT] = cornerBlocks[BOTTOMRIGHT] = dynamic_cast<RectangleBlock*>(*(--blocks->end()))->GetSprite()->GetPosition();
+	cornerBlocks[BOTTOM] = cornerBlocks[TOP] = cornerBlocks[TOPLEFT];
+*/	
+
 }
 
-Map::Map() {
+Map::Map():
+sortFlag(false)
+{
 	blocks = new EntityManager();
 
 }
@@ -44,12 +37,22 @@ void Map::Render(sf::RenderWindow* app,TextureManager* textureManager,sf::Vector
 	for(EntityManagerTypes::iterator it = blocks->begin();
 		it != blocks->end();
 		it++) {
+			
 			(*it)->Render(app,textureManager,offSet);								//block-ok egyenkénti kirendelelése
 	}
 }
 
 void Map::Push(Entity*  blck) {
+	sf::Vector2<float> new_pos  = dynamic_cast<RectangleBlock*>(blck)->GetSprite()->GetPosition();
+
+	
+	if(new_pos.x < cornerBlocks[mapname::LEFT].x)		cornerBlocks[mapname::LEFT]		=	cornerBlocks[TOPLEFT] = new_pos;
+	if(new_pos.y < cornerBlocks[TOP].y)					cornerBlocks[TOP]				=	new_pos;
+	if(new_pos.x > cornerBlocks[mapname::RIGHT].x)		cornerBlocks[mapname::RIGHT]	=	cornerBlocks[BOTTOMRIGHT] = new_pos;
+	if(new_pos.y > cornerBlocks[BOTTOM].y)				cornerBlocks[BOTTOM]			=	new_pos;
+	
 	blocks->Push(blck);
+	sortFlag = true;
 }
 
 Entity* Map::Get(Entity* entity) {
@@ -60,6 +63,7 @@ Entity* Map::Get(Entity* entity) {
 
 void Map::Remove(Entity* entity) {
 	blocks->Remove(entity);
+	sortFlag = true;
 }
 
 void Map::Remove(sf::Vector2<float> p) {
@@ -76,23 +80,7 @@ void Map::Remove(sf::Vector2<float> p) {
 			}
 		
 	}
-}
-
-void Map::GenerateCollBoxes() {
-	for(EntityManagerTypes::iterator it = blocks->begin();
-		it != blocks->end();
-		it++) {
-			Block* blck = dynamic_cast<Block*>(*it);
-			int x = blck->GetCoord().x/resource::consts::BLOCK_SIZE;
-			int y = blck->GetCoord().y/resource::consts::BLOCK_SIZE;
-			coll_boxes[sf::Vector2<float>(x,y)] = true;
-	}
-	
-
-}
-
-bool Map::GetColBox(sf::Vector2<float> coord) {
-	return coll_boxes[coord];
+	sortFlag = true;
 }
 
 
@@ -113,4 +101,54 @@ ButtonManager* Map::OnRightClick(sf::Vector2<float> mouse) {
 		
 	}
 		
+}
+
+void Map::OpenMapFromFile(std::string path,TextureManager* textureManager) {
+	fstream file;
+	file.open(path,fstream::in);
+	std::string line;
+	bool first = true;			//cornerBlockok feltöltése az elsõ elemmel
+	while(file.eof() != true && getline(file,line)) {
+		Push(new RectangleBlock(line,textureManager));	
+		//a tipus számláló növelése
+		
+		if(first) {
+			for(int i=0;i<6;i++) cornerBlocks[i] = dynamic_cast<RectangleBlock*>(*blocks->begin())->GetSprite()->GetPosition();
+			first = false;
+		}
+	}
+}
+
+sf::Vector2<float> Map::GetTopLeft() {
+/*	if(sortFlag) {
+		blocks->Sort();
+	}*/
+	return cornerBlocks[TOPLEFT];
+}
+
+sf::Vector2<float> Map::GetDownRight() {
+	/*if(sortFlag) {
+		blocks->Sort();
+	}*/
+	return cornerBlocks[BOTTOMRIGHT];
+}
+
+sf::Vector2<float> Map::GetLeft() {
+	return cornerBlocks[mapname::LEFT];
+}
+
+Entity* Map::GetTopRight() {
+	return NULL;
+}
+
+sf::Vector2<float> Map::GetTop() {
+	return cornerBlocks[TOP];
+}
+
+sf::Vector2<float> Map::GetRight() {
+	return cornerBlocks[mapname::RIGHT];
+}
+
+sf::Vector2<float> Map::GetBottom() {
+	return cornerBlocks[mapname::BOTTOM];
 }

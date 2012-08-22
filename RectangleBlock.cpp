@@ -6,30 +6,34 @@
 #include "WeaponData.h"
 #include "MonsterData.h"
 #include "GatewayData.h"
+#include "InfoManager.h"
 using namespace resource::consts;
 
-RectangleBlock::RectangleBlock(sf::Shape r,int type):
+RectangleBlock::RectangleBlock(sf::Shape r,int type,TextureManager* textureManager,bool render_info):
 rect(r),
 Entity(0),
 defType(type),
 EngineType(PLATFORM),
-data(NULL){
-	sprite = sf::Sprite();
-	sprite.SetPosition(rect.GetPointPosition(0));
-	float scaleX = (rect.GetPointPosition(2).x - rect.GetPointPosition(1).x) /
-					resource::consts::BLOCK_SIZE;
-	sprite.SetScaleX(scaleX);
+data(NULL),
+renderInfoFlag(render_info){
+	sprite = new sf::Sprite();
+
+	if(sprite->GetImage() == NULL) sprite->SetImage(textureManager->operator[](defType));
+	sprite->SetPosition(rect.GetPointPosition(0));
+	float scaleX = (rect.GetPointPosition(UpRight).x - rect.GetPointPosition(UpLeft).x) /
+			sprite->GetSize().x;
+	float scaleY = (rect.GetPointPosition(DownLeft).y - rect.GetPointPosition(UpLeft).y) /
+			sprite->GetSize().y;
+	sprite->SetScale(scaleX,scaleY);
 	hit[0] = true;
 	hit[1] = true;
 	hit[2] = true;
 	hit[3] = true;
 
-
+	
 
 	SetDataForEngine(EngineType);
-	data->SetOwner(this);
 	
-	data->SetButtonManager(new ButtonManager(sf::Vector2<float>(rect.GetPointPosition(UpLeft))));
 	
 	
 
@@ -40,24 +44,79 @@ rect(),
 Entity(0),
 sprite(),
 EngineType(PLATFORM),
-data(NULL){
+data(NULL),
+renderInfoFlag(false){
 
 }
 
-RectangleBlock::~RectangleBlock() {
+RectangleBlock::RectangleBlock(const RectangleBlock& rb):
+rect(rb.rect),
+defType(rb.defType),
+EngineType(rb.EngineType),
+renderInfoFlag(rb.renderInfoFlag){
+	for(int i=0;i<4;i++) hit[i] = rb.hit[i];
+	sprite = new sf::Sprite(*rb.sprite);
+	SetDataForEngine(rb.EngineType,rb.data);
+}
 
+RectangleBlock::RectangleBlock(std::string line,TextureManager* textureManager):
+data(NULL),
+EngineType(PLATFORM),
+renderInfoFlag(true)
+{
+	/** minden elemnél ez a 3 rész fix, a többi speficikus így azt a DataForEngine kezeli **/
+	sf::Vector2<float> DownRightPoint;
+	char* tmp = new char[line.size()+1];
+	strcpy(tmp,line.c_str());
+	tmp = strtok(tmp," ");
+	tmp = strtok(NULL," ");
+	DownRightPoint.x = atoi(tmp);
+	tmp = strtok(NULL," ");
+	DownRightPoint.y = atoi(tmp);
+
+//	sscanf(line.c_str(),"%s %d %d",tmp,&DownRightPoint.x,&DownRightPoint.y);
+	rect =  sf::Shape();
+	rect.AddPoint(DownRightPoint);
+	rect.AddPoint(DownRightPoint);
+	rect.AddPoint(DownRightPoint);
+	rect.AddPoint(DownRightPoint);
+	/******************************************************************/
+	
+
+
+
+	SetDataForEngine(line);
+
+
+	if(sprite->GetImage() == NULL) sprite->SetImage(textureManager->operator[](defType));
+	if(rect.GetPointPosition(DownLeft) == rect.GetPointPosition(DownRight)) {
+		//ilyenkor nincs a rectrõl infõ a .map file-ban ezért a sprite nagyságával
+		//hozzuk létre
+		sf::Vector2<float>	DownLeftPos = rect.GetPointPosition(DownLeft);
+		rect.SetPointPosition(UpLeft,DownLeftPos.x,DownLeftPos.y +sprite->GetSize().x );
+		rect.SetPointPosition(UpRight,DownLeftPos.x + sprite->GetSize().x ,DownLeftPos.y + sprite->GetSize().y);
+		rect.SetPointPosition(DownRight,DownLeftPos.x + sprite->GetSize().x ,DownLeftPos.y);
+
+	}
+
+
+	resource::function::deTransform(rect);
+	resource::function::deTransform(*sprite);
+
+	
+
+
+}
+
+
+RectangleBlock::~RectangleBlock() {
+	delete sprite;
+	delete data;
 
 }
 
 sf::Sprite	RectangleBlock::CopySprite(sf::Sprite& sprite,sf::Vector2<float> offSet) {
 	sf::Sprite ret = sf::Sprite(sprite);
-	float scaleX = (rect.GetPointPosition(UpRight).x - rect.GetPointPosition(UpLeft).x) /
-					sprite.GetSize().x;
-		
-	float scaleY = (rect.GetPointPosition(DownRight).y - rect.GetPointPosition(UpRight).y) /
-					sprite.GetSize().y;
-
-	ret.Scale(scaleX,scaleY);	
 	sf::Vector2<float> new_coord = sprite.GetPosition() - offSet;
 	ret.SetPosition(new_coord);
 	
@@ -74,19 +133,29 @@ void RectangleBlock::RenderInfo(sf::RenderWindow* target,sf::Vector2<float> offS
 
 	if(EngineType == PLATFORM) {
 	RenderHitLine(target,offSet);
+	} else if(EngineType == AMMO) {
+		stringstream os;
+		os << data->GetName() << " " << data->GetValue(WEAPONTYPE);
+		str.SetText(os.str());
 	}
 	target->Draw(str);
 }
 
 void	RectangleBlock::Render(sf::RenderWindow* target,TextureManager* textureManager,sf::Vector2<float> offSet) {
-	if(sprite.GetImage() == NULL) sprite.SetImage(textureManager->operator[](defType));
 	
+	if(sprite->GetPosition().x - offSet.x > 0 ||
+		sprite->GetPosition().x - offSet.x < resource::consts::SCREEN_WIDTH ||
+		sprite->GetPosition().y - offSet.y > 0 ||
+		sprite->GetPosition().y - offSet.y < resource::consts::SCREEN_HEIGHT) {
 
+			sprite->SetPosition(sprite->GetPosition() - offSet);		//transformálás
+			target->Draw(*sprite);
+			sprite->SetPosition(sprite->GetPosition() + offSet);		//vissza
+			
+			//információ renderelése ha a flag true
+			if(renderInfoFlag)		RenderInfo(target,offSet);
 
-	target->Draw(CopySprite(sprite,offSet));
-	RenderInfo(target,offSet);
-
-
+	}
 
 
 
@@ -133,11 +202,11 @@ void	RectangleBlock::deSerialize(std::string line) {
 	tmp = strtok(NULL," ");
 	defType = atoi(tmp);
 	
-	sprite = sf::Sprite();
-	sprite.SetPosition(rect.GetPointPosition(0));
+	sprite = new sf::Sprite();
+	sprite->SetPosition(rect.GetPointPosition(0));
 	float scaleX = (rect.GetPointPosition(2).x - rect.GetPointPosition(1).x) /
 					resource::consts::BLOCK_SIZE;
-	sprite.SetScaleX(scaleX);
+	sprite->SetScaleX(scaleX);
 	
 	
 
@@ -146,7 +215,7 @@ void	RectangleBlock::deSerialize(std::string line) {
 //	data->SetOwner(this);
 
 //	data->SetButtonManager(new ButtonManager(sf::Vector2<float>(rect.GetPointPosition(UpLeft))));
-	
+	delete[] tmp;
 
 	
 }
@@ -243,7 +312,12 @@ std::string	RectangleBlock::SerializeForEngine() {
 }
 
 void RectangleBlock::SetDataForEngine(int type) {
-	if(data != NULL) delete data;
+	if(data != NULL) {
+		delete data;
+		resource::globalInfoManager->instance()->GetInfoManager()->IncCount(EngineType,type);
+	} else {
+		resource::globalInfoManager->instance()->GetInfoManager()->IncCount(type);
+	}
 	switch(type) {
 	case PLATFORM:
 		data = new PlatformData();
@@ -266,4 +340,87 @@ void RectangleBlock::SetDataForEngine(int type) {
 		data->SetButtonManager(new ButtonManager(sf::Vector2<float>(rect.GetPointPosition(UpLeft))));
 		EngineType = type;
 		
+}
+
+void RectangleBlock::SetDataForEngine(std::string line) {
+	char* tmp = new char[line.size() + 1];
+	strcpy(tmp,line.c_str());
+
+	tmp = strtok(tmp," ");
+	int type = 0;
+
+	if(data != NULL) delete data;
+	if(strcmp(tmp,"PLATFORM") == 0)	{
+		data = new PlatformData();
+		type = PLATFORM;
+	}
+	if(strcmp(tmp,"WEAPON") == 0)	{
+		data = new WeaponData();
+		type = WEAPON;
+	}
+	if(strcmp(tmp,"MONSTER") == 0)	{
+		data = new MonsterData();
+		type = MONSTER;
+	}
+	if(strcmp(tmp,"SPAWNPLACE") == 0 || strcmp(tmp,"ENDLEVELBUTTON") == 0) {
+		data = new GatewayData(); 
+		type = GATEWAY;
+	}
+	if(strcmp(tmp,"AMMO") == 0)	{
+		data = new AmmoData();
+		type = AMMO;
+	}
+
+
+		data->SetOwner(this);
+		data->deSerialize(line);
+		data->SetButtonManager(new ButtonManager(sf::Vector2<float>(rect.GetPointPosition(UpLeft))));
+		EngineType = type;
+
+		
+		resource::globalInfoManager->instance()->GetInfoManager()->IncCount(EngineType);
+	
+		
+}
+void RectangleBlock::SetDataForEngine(int type,DataForEngine* d) {
+	if(data != NULL) {
+		delete data;
+		resource::globalInfoManager->instance()->GetInfoManager()->IncCount(EngineType,type);
+	}
+	switch(type) {
+	case PLATFORM:
+		data = new PlatformData((*dynamic_cast<PlatformData*>(d)));
+		break;
+	case WEAPON:
+		data = new WeaponData((*dynamic_cast<WeaponData*>(d)));
+		break;
+	case AMMO:
+		data = new AmmoData((*dynamic_cast<AmmoData*>(d)));
+		break;
+	case MONSTER:
+		data = new MonsterData((*dynamic_cast<MonsterData*>(d)));
+		break;
+	case GATEWAY:
+		data = new GatewayData((*dynamic_cast<GatewayData*>(d)));
+		break;
+
+	}
+		data->SetOwner(this);
+		//data->SetButtonManager(new ButtonManager(sf::Vector2<float>(rect.GetPointPosition(UpLeft))));
+		//EngineType = type;
+		
+}
+
+bool	RectangleBlock::operator<(const Entity* rect) {
+	const RectangleBlock*	rb = dynamic_cast<const RectangleBlock*>(rect);
+	sf::Vector2<float> this_pos = (*this).sprite->GetPosition();
+	sf::Vector2<float> rb_pos = rb->sprite->GetPosition();
+
+	if(this_pos.x < rb_pos.x) return true;
+	if(this_pos.x == rb_pos.x) {
+		if(this_pos.y < rb_pos.y) {
+			return true;
+		}
+	}
+	return false;
 }

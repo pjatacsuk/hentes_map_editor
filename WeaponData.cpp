@@ -88,3 +88,21 @@ void	WeaponData::AddChangeTypeMenu() {
 	bman->GetLast().SetValue(GATEWAY);
 
 }
+
+void WeaponData::deSerialize(std::string line) {
+	char tmpname[50];
+	int pos[2];
+	int weapon_type;
+	
+
+	sscanf(line.c_str(),"%s %d %d %d",&tmpname,&pos[0],&pos[1],&weapon_type);
+	
+	attributes[WEAPONTYPE] = weapon_type;
+
+	parent->sprite = new sf::Sprite();
+	parent->sprite->SetPosition(pos[0],pos[1]);
+	
+	/** temp megoldás TODO: rendes **/
+	
+	parent->defType = attributes[WEAPONTYPE];
+}

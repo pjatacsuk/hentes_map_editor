@@ -55,3 +55,4 @@ void TextureManager::Add(int type,std::string source) {
 	image.LoadFromFile(source);
 	Add(textures.size(),image);
 }
+

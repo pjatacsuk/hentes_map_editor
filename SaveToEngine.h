@@ -9,8 +9,9 @@
 
 class SaveToEngine{
 private:
-	ofstream file;
-	Map*	_map;
+	ofstream	file;
+	std::string mapname;
+	Map*		_map;
 public:
 	SaveToEngine(std::string output,Map*);
 	~SaveToEngine();

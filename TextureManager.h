@@ -24,7 +24,7 @@ public:
 	void			Add(int type,std::string source);
 	void			Free_Texture(int type);
 	sf::Image&		operator[](int i);
-
+	//const sf::Image&		operator[](int i) const;
 	
 };
 

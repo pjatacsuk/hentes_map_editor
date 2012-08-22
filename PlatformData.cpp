@@ -13,6 +13,37 @@ PlatformData::~PlatformData(){
 
 }
 
+void	PlatformData::deSerialize(std::string line) {
+	int bhit[4];
+	char texturename[50];
+	char name[50];
+	sf::Vector2<float>	tmp;
+	int rect_size[2];
+	int sprite_pos[2];
+	int	sprite_size[2];
+	float	scale[2];
+	sscanf(line.c_str(),"%s %d %d %d %d %d %d %d %d %s %d %d %d %d %f %f",&name,&tmp.x,&tmp.y,&rect_size[0],&rect_size[1],
+																	&bhit[0],&bhit[1],&bhit[2],&bhit[3],
+																	&texturename,
+																	&sprite_pos[0],&sprite_pos[1],
+																	&sprite_size[0],&sprite_size[1],
+																	&scale[0],&scale[1]);
+	sf::Vector2<float>	DownLeftPos = parent->rect.GetPointPosition(DownLeft);
+	parent->rect.SetPointPosition(UpLeft,DownLeftPos.x,DownLeftPos.y + rect_size[1] );
+	parent->rect.SetPointPosition(UpRight,DownLeftPos.x + rect_size[0] ,DownLeftPos.y + rect_size[1]);
+	parent->rect.SetPointPosition(DownRight,DownLeftPos.x + rect_size[0] ,DownLeftPos.y);
+
+	parent->sprite = new sf::Sprite();
+	parent->sprite->SetPosition(sprite_pos[0],sprite_pos[1]);
+	parent->sprite->SetScale(scale[0],scale[1]);
+
+	parent->defType = GetSpriteID(texturename);
+
+	for(int i=0;i<4;i++) {
+	parent->hit[i] = bhit[i];
+	}
+}
+
 std::string PlatformData::SerializeForEngine() {
 		std::stringstream os;
 		os << name << " ";
@@ -23,23 +54,23 @@ std::string PlatformData::SerializeForEngine() {
 		os << parent->rect.GetPointPosition(DownRight).y - parent->rect.GetPointPosition(UpRight).y		<< " ";	//height
 		os << parent->hit[LEFT]		<< " " <<  parent->hit[UP]		<< " "
 		   << parent->hit[RIGHT]	<< " " << parent->hit[DOWN]		<< " ";										//falak
-		os << parent->defType		<< " ";																		//spriteID
-		sf::Vector2<float> sprite_pos = Transform(parent->sprite.GetPosition() +
-												sf::Vector2<float>(0,resource::consts::BLOCK_SIZE));
+		os << texture_names[parent->defType]		<< " ";																		//spriteID
+		sf::Vector2<float> sprite_pos = Transform(parent->sprite->GetPosition() +
+			sf::Vector2<float>(0,parent->sprite->GetSize().y));
 		os << sprite_pos.x					<< " " <<	sprite_pos.y					 << " ";				//sprite x y
-		os << parent->sprite.GetSize().x	<< " " <<	parent->sprite.GetSize().x		 << " ";	
+		os << parent->sprite->GetSize().x	<< " " <<	parent->sprite->GetSize().x		 << " ";	
 		
-		sf::Vector2<float> scale = sf::Vector2<float>();
+		/*sf::Vector2<float> scale = sf::Vector2<float>();
 		
 		scale.x =	parent->rect.GetPointPosition(DownRight).x - parent->rect.GetPointPosition(DownLeft).x;
-		scale.x = scale.x / parent->sprite.GetSize().x;
+		scale.x = scale.x / parent->sprite->GetSize().x;
 
 		scale.y =	 parent->rect.GetPointPosition(DownRight).y - parent->rect.GetPointPosition(UpRight).y;
-		scale.y = scale.y / parent->sprite.GetSize().y;
+		scale.y = scale.y / parent->sprite->GetSize().y;*/
 		
 		//sprrite w h
-		//os << parent->sprite.GetScale().x	<< " " <<	parent->sprite.GetScale().y		 << " ";	
-		os	<< scale.x << " " << scale.y << " ";
+		os << parent->sprite->GetScale().x	<< " " <<	parent->sprite->GetScale().y		 << " ";	
+//		os	<< parent->sprite->GetScale().x << " " << scale.y << " ";
 
 
 	return os.str();

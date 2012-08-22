@@ -17,7 +17,7 @@ public:
   virtual std::string Serialize()=0;
   virtual std::string SerializeForEngine()=0;
   virtual void deSerialize(std::string line)=0;
-  //virtual bool operator<(const Entity* entity);
+  virtual bool operator<(const Entity* entity);
   virtual bool operator==(const Entity* entity);
   //virtual bool operator<(const Entity& entity);
 

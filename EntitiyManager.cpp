@@ -20,7 +20,19 @@ void EntityManager::Push(Entity* entity) {
 				return;
 			}
 	}
-	entities.insert(entity);
+	entities.push_front(entity);
+	id_count++;
+}
+
+void EntityManager::PushBack(Entity* entity) {
+	for(EntityManagerTypes::iterator it = begin();
+		it!= end();
+		it++) {
+			if((*it)->operator==(entity)) {
+				return;
+			}
+	}
+	entities.push_back(entity);
 	id_count++;
 }
 
@@ -53,7 +65,15 @@ void EntityManager::Remove(EntityManagerTypes::iterator it) {
 }
 
 void EntityManager::Sort() {
-	
+	for(iterator it = entities.begin();it != entities.end();it++) {
+		for(iterator ot = entities.begin();ot != entities.end();ot++) {
+			if(it != ot) {
+				if( (*it)->operator<( (*ot)) ) {
+					std::iter_swap(it,ot);
+				}
+			}
+		}
+	}
 }
 
 

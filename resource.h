@@ -2,14 +2,21 @@
 #include "Entity.h"
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
+#include "FontManager.h"
+#include "TextureManager.h"
+
 
 class RectangleBlock;
+class InfoManager;
+
+
 
 namespace resource {
 #ifndef RESOURCE_H
 #define RESOURCE_H
 	enum {UP,LEFT,DOWN,RIGHT};
 	enum {WEAPONTYPE,AMOUNT};
+	enum {GATEWAY,PLATFORM,WEAPON,AMMO,MONSTER};
 	enum {MONSTERTYPE,HEALTH,MONSTERWEAPON,DAMAGE};
 #endif
 
@@ -18,6 +25,11 @@ namespace resource {
 			
 		sf::Vector2<float> Transform(sf::Vector2<float> v);
 		sf::Vector2<float> Transform(int x, int y);
+		sf::Vector2<float> deTransform(sf::Vector2<float> v);
+		sf::Vector2<float> deTransform(int x, int y);
+		void deTransform(sf::Shape& rect);
+		void deTransform(sf::Sprite& sprite);
+		int GetSpriteID(std::string name);
 			
 	}
 
@@ -32,6 +44,27 @@ namespace resource {
 		static const int FPS			=	60;
 		static const int BUTTON_WIDTH	=	70;
 		static const int BUTTON_HEIGHT	=	30;
+		static const int MAX_TEXTURE	=	50;
+		
+		static const std::string map_dir_path = ".\\data\\maps\\";
+
+		static const std::string texture_names[MAX_TEXTURE] = {
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"ALMAKORTESZILVASPRITE",
+			"SPRITE2",
+			"SPAWNPLACE",
+			"ENDLEVELBUTTON",
+			"EGESZENMAS",
+			"BOX_TEXTURE"
+		};
+
+//		static TextureManager*  myTextureManager;
 #endif
 	}
 	namespace objects {
@@ -42,8 +75,83 @@ namespace resource {
 				return (*x) < (*y);
 			}
 		};
+		class GlobalTexture {
+		private:
+			TextureManager* myTextureManager;
+			static GlobalTexture* s_instance;
+			GlobalTexture() {
+				myTextureManager = new TextureManager("./textures.txt");
+
+			}
+		public:
+			static GlobalTexture* instance() {
+				if(s_instance==NULL) {
+					s_instance = new GlobalTexture();
+					
+				}
+				return s_instance;
+			}
+			sf::Image& GetTexture(int i) {
+				return s_instance->myTextureManager->operator[](i);
+			}
+			inline TextureManager* GetTextureManager() {
+				return myTextureManager;
+			}
+			
+		};
+
+		class GlobalTextManager {
+		private:
+			FontManager* myFontManager;
+			static GlobalTextManager* s_instance;
+			GlobalTextManager() {
+				myFontManager = new FontManager();
+			}
+		public:
+			static GlobalTextManager* instance() {
+				if(s_instance == NULL) {
+					s_instance = new GlobalTextManager();
+				}
+				return s_instance;
+			}
+			void SetRenderTarget(sf::RenderWindow* rw) {
+				myFontManager->SetTargetWindow(rw);
+			}
+			FontManager* GetFontManager() {return myFontManager;}
+			
+		};
+		
+		class GlobalInfoManager {
+		private:
+			InfoManager* myInfoManager;
+			static	GlobalInfoManager* s_instance;
+			GlobalInfoManager();
+
+		public:
+			static GlobalInfoManager* instance() {
+				if(s_instance == NULL) {
+					s_instance = new GlobalInfoManager();
+				}
+				return s_instance;
+			}
+			InfoManager*	GetInfoManager() {
+				return myInfoManager;
+			}
+
+			void	Reset();
+			
+
+		};
 
 #endif
 
 	}
+#ifndef globaltexture
+#define globaltexture
+	static resource::objects::GlobalTexture* globalTexture = NULL;
+	static resource::objects::GlobalTextManager* globalTextManager = NULL;
+	static resource::objects::GlobalInfoManager* globalInfoManager = NULL;
+#endif
+
+
 }

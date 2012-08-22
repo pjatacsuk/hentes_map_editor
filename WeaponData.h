@@ -16,14 +16,15 @@ public:
 	WeaponData();
 	~WeaponData();
 
-	std::string SerializeForEngine();
-	std::string GetName();
+	std::string		SerializeForEngine();
+	void			deSerialize(std::string line);
+	std::string		GetName();
 
-	void SetOwner(RectangleBlock* p);
-	void SetButtonManager(ButtonManager* bman);
+	void			SetOwner(RectangleBlock* p);
+	void			SetButtonManager(ButtonManager* bman);
 
-	void CallBack(int i,int value);
-	void AddChangeTypeMenu();
+	void			CallBack(int i,int value);
+	void			AddChangeTypeMenu();
 
 };
 

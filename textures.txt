@@ -5,4 +5,11 @@ block_random.png
 block_random2.png
 block_random3.png
 block_water.png
+lena.png
+block_proba.jpg
+block_spawn.png
+block_end.png
 proba.png
+box_texture.png
+box_texture.png
+box_texture.png

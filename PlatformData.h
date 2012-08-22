@@ -14,13 +14,14 @@ public:
 	PlatformData();
 	~PlatformData();
 	
-	std::string SerializeForEngine();
-	std::string GetName();
-	void		SetOwner(RectangleBlock* p);
-	void		SetButtonManager(ButtonManager* bman);
-	
-	void		CallBack(int i,int value);
-	void		AddChangeTypeMenu();
+	std::string		SerializeForEngine();
+	void			deSerialize(std::string line);
+	std::string		GetName();
+	void			SetOwner(RectangleBlock* p);
+	void			SetButtonManager(ButtonManager* bman);
+		
+	void			CallBack(int i,int value);
+	void			AddChangeTypeMenu();
 
 
 };

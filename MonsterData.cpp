@@ -16,19 +16,36 @@ MonsterData::~MonsterData() {
 
 std::string MonsterData::SerializeForEngine() {
 	std::stringstream os;
-
+	//MONSTERTYPE kíírása
 	os << name << " ";
 	
+	//pos kiírása
 	sf::Vector2<float> rect_pos = Transform(parent->rect.GetPointPosition(DownLeft));		//átalakítás
 	os << rect_pos.x				<< " " <<			rect_pos.y		<< " ";				//x y
-	os << attributes[MONSTERTYPE] << " " << parent->defType << " ";
+	
+	//sprite kiírása
+	os << texture_names[parent->defType] << " ";
+	
+	//élet kiírása
 	os << attributes[HEALTH] << " ";
+	
+	//tipus specifikus dolog kiírása
 	if(attributes[MONSTERTYPE] == CONTACT) {
 		os << attributes[DAMAGE] << " ";
 	} else if(attributes[MONSTERTYPE] == SHOOTER) {
 		os << attributes[MONSTERWEAPON] << " ";
 	}
-	os << parent->sprite.GetSize().x << " " << parent->sprite.GetSize().y;
+	//monstertipus kiírása
+	if(attributes[MONSTERTYPE] == CONTACT) {
+		os << "CONTACT" << " ";
+	} else {
+		os << "SHOOTER" << " ";
+	}
+	
+	
+	
+	//méret kiírása
+	os << parent->sprite->GetSize().x << " " << parent->sprite->GetSize().y;
 	return os.str();
 
 }
@@ -154,4 +171,37 @@ void MonsterData::AddChangeTypeMenu() {
 
 	bman->Add(index,"Gateway",this);
 	bman->GetLast().SetValue(GATEWAY);
+}
+
+void	MonsterData::deSerialize(std::string line) {
+	char tmpname[50];
+	int  rect_pos[2];
+	char spritename[100];
+	int  health;
+	int	 specific_attribute;
+	char type[100];
+	int	 sprite_size[2];
+
+	sscanf(line.c_str(),"%s %d %d %s %d %d %s %d %d",
+		&tmpname,&rect_pos[0],&rect_pos[1],
+		&spritename,&health,
+		&specific_attribute,&type,&sprite_size[0],
+		&sprite_size[1]);
+	//rect pos már be van rakva globálisan mindennél, ezért sprite nagyságával fogja létrehozni
+	attributes[HEALTH] = health;
+	if(parent->sprite != NULL) parent->sprite = new sf::Sprite();
+	parent->sprite->SetPosition(rect_pos[0],rect_pos[1]);
+	parent->defType = GetSpriteID(spritename);
+
+	if(strcmp(type,"SHOOTER") == 0) {
+		attributes[MONSTERTYPE] = SHOOTER;
+		attributes[WEAPONTYPE] = specific_attribute;
+
+	}
+	if(strcmp(type,"CONTACT") == 0) {
+		attributes[MONSTERTYPE] = CONTACT;
+		attributes[DAMAGE] = specific_attribute;
+	}
+
+
 }

@@ -33,15 +33,18 @@ _textureNumbers(textureManager->Size())
 		_RectSelects[i].EnableOutline(true);
 
 		_TextureSprites[i].SetImage(_textureManager->operator[](i));
-		_TextureSprites[i].Scale(0.7,0.7);
+		float scaleX = resource::consts::BLOCK_SIZE / _TextureSprites[i].GetSize().x;
+		float scaleY = resource::consts::BLOCK_SIZE / _TextureSprites[i].GetSize().y;
+		_TextureSprites[i].SetScale(scaleX*0.5,scaleY*0.5);
 	}
 }
 
 /** a ciklusoknál kiszámolja mennyi még a hátramaradó textúra amit ki kell számolni**/
 int		CircularTextureSelect::RemainingTexture() {
-	int ret = _textureNumbers % MAX_TEXTURE_PER_CIRCLE * _CurrentCircle;
-		if(ret == 0) ret = 6;
-		return _CurrentCircle * MAX_TEXTURE_PER_CIRCLE;
+	if(_CurrentCircle == 0) return 0;
+
+	return _CurrentCircle * MAX_TEXTURE_PER_CIRCLE;
+
 }
 /** Meghatározza az index alapján a selecthez szükséges rectangle-t,
 ezen pontok a kör oldalán lesznek **/
@@ -83,8 +86,8 @@ void	CircularTextureSelect::UpdatePosition(const int x,const int y) {
 	if(_CircleNumbers == 1) {
 		_texturePerCurrentCircle = _textureNumbers;
 	} else {
-		_texturePerCurrentCircle = _textureNumbers % MAX_TEXTURE_PER_CIRCLE * _CurrentCircle;
-		if(_texturePerCurrentCircle == 0) _texturePerCurrentCircle = 6;
+		_texturePerCurrentCircle = _textureNumbers - MAX_TEXTURE_PER_CIRCLE * _CurrentCircle;
+		if(_texturePerCurrentCircle >= MAX_TEXTURE_PER_CIRCLE) _texturePerCurrentCircle = 6;
 	}
 
 	
@@ -122,6 +125,8 @@ void CircularTextureSelect::UpdateTexturePositions() {
 
 		real_coord -= sf::Vector2<float>(resource::consts::BLOCK_SIZE/3,resource::consts::BLOCK_SIZE/3);
 
+
+		//speciális két textúrás kör esetén jobb, ballra elcsúsztatjuk ket
 		if(_texturePerCurrentCircle == 2) {
 			if(i % 2 == 0) {
 				real_coord += sf::Vector2<float>(_radius/2,0);
@@ -213,7 +218,7 @@ void CircularTextureSelect::Render(sf::RenderWindow* target) {
 										  sf::Color(0,0,0));
 		target->Draw(line);
 		target->Draw(line2);
-		target->Draw(_TextureSprites[ i + RemainingTexture()]);		//ha már a 2. 3. ... körbe vagyunk
+		target->Draw(_TextureSprites[ i + RemainingTexture()]);		//ha már a 2. 3. ... körbe vagyunk 
 	//	sf::Sprite texture(_textureManager->operator[](i),center);
 	//	target->Draw(texture);
 

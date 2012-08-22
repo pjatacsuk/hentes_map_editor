@@ -3,7 +3,7 @@
 #include "Map.h"
 #include <string>
 #include "TextureManager.h"
-#include "TextManager.h"
+#include "RectangleBlock.h"
 #include "ButtonManager.h"
 #include "CircularTextureSelect.h"
 using namespace std;
@@ -14,29 +14,48 @@ class Editor {
 private:
   Map*						_map;
   bool						running;
-  bool						playing;
   sf::Vector2<float>		offSet;
   int						block_type;
   sf::Sprite				mouse_sprite;
-  TextManager*				textManager;
+  std::string				mapName;
+  sf::Sprite				bg_sprite;
+  sf::Image					bg_image;
+  
+  RectangleBlock*			select_rblock;
+  
+  bool						mouse_button_pressed;
+  
   CircularTextureSelect*	CTS;
-  bool						right_mouse_clicked;
   ButtonManager*			actualButtonManager;
+  TextureManager*			textureManager;
+  sf::RenderWindow*			target;
+  
 public:
   Editor();
-  Editor(std::string source);
+  Editor(std::string source,TextureManager* tman,sf::RenderWindow* app);
   ~Editor();
-  void			Loop(sf::RenderWindow* target,TextureManager* textureManager);
+  void			Loop();
   void			Update();
-  void			Render(sf::RenderWindow* target,TextureManager* textureManager);
+  void			Render();
+
+  void			RenderInfo();
+
   void			Save(std::string output);
+  void			TextureSelectionsUP();
+  void			TextureSelectionsDOWN();
   
-//  void			AddBlock(sf::Event& Event,int& x,int& y);
-// void			RemoveBlock(sf::Event& Event,int& x, int& y);
 
   void			AddLineOfBlock(int& x,int& y,int& n_x,int& n_y);
-//  void			RemoveLineOfBlock(int& x,int& y,int& n_x,int& n_y);
   void			RemoveRectangleLineOfBlock(sf::Vector2<float>);
-  void			UpdateMouse(sf::RenderWindow* target,TextureManager* textureManager,sf::Event& Event,int& moues_x,int& mouse_y);
+  void			UpdateMouse(sf::RenderWindow* target,sf::Event& Event,int& moues_x,int& mouse_y);
 
+  void			UpdateSelectSprite(int x, int y);
+
+  void			GotoTopLeft();
+  void			GotoDownRight();
+  void			GotoStart();
+  void			GotoLeft();
+  void			GotoRight();
+  void			GotoTop();
+  void			GotoBottom();
 };
