@@ -1,9 +1,124 @@
-﻿Build started 2012.08.21. 20:03:00.
+﻿Build started 2012.08.22. 22:34:15.
      1>Project "C:\Users\Pjata\Documents\Visual Studio 2010\Projects\proba\proba\proba.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\proba.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D SFML_DYNAMIC /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Editor.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D SFML_DYNAMIC /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AmmoData.cpp Block.cpp Button.cpp ButtonManager.cpp CirculaTextureSelect.cpp Editor.cpp EntitiyManager.cpp Entity.cpp Font.cpp FontManager.cpp Game.cpp GatewayData.cpp InfoManager.cpp Map.cpp Menu.cpp MonsterData.cpp PlatformData.cpp RectangleBlock.cpp SaveToEngine.cpp TextureManager.cpp WeaponData.cpp main.cpp resource.cpp
+         resource.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         main.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+         WeaponData.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\weapondata.cpp(98): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\weapondata.cpp(103): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\weapondata.cpp(103): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         TextureManager.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\texturemanager.cpp(43): warning C4018: '>' : signed/unsigned mismatch
+         SaveToEngine.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\savetoengine.cpp(37): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\savetoengine.cpp(38): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+         RectangleBlock.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(70): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(71): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(72): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(73): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(74): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(75): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(167): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(180): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(183): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(189): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(190): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(192): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(193): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(199): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(200): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(202): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(225): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(347): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\rectangleblock.cpp(349): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+         PlatformData.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\platformdata.cpp(30): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\platformdata.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\platformdata.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\platformdata.cpp(43): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         MonsterData.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\monsterdata.cpp(189): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\monsterdata.cpp(193): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\monsterdata.cpp(193): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Menu.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(43): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(55): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(55): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(59): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(59): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(66): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(101): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(101): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Map.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+         InfoManager.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\infomanager.cpp(97): warning C4244: 'argument' : conversion from 'const float' to 'const int', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\infomanager.cpp(97): warning C4244: 'argument' : conversion from 'const float' to 'const int', possible loss of data
+         GatewayData.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\gatewaydata.cpp(105): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\gatewaydata.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\gatewaydata.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Game.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+         FontManager.cpp
+         Font.cpp
+         Entity.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+         EntitiyManager.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
          Editor.cpp
      1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
      1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
@@ -27,6 +142,62 @@
      1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\editor.cpp(428): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
      1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\editor.cpp(429): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
      1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\editor.cpp(429): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+         CirculaTextureSelect.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(11): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(38): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(38): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(60): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(60): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(71): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(71): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(85): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(85): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(94): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(132): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(134): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(149): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(165): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\circulatextureselect.cpp(166): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+         ButtonManager.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\buttonmanager.cpp(203): warning C4715: 'ButtonManager::operator[]' : not all control paths return a value
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\entitiymanager.cpp(48): warning C4715: 'EntityManagerTypes::EntityManager::Get' : not all control paths return a value
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\map.cpp(104): warning C4715: 'Map::OnRightClick' : not all control paths return a value
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\menu.cpp(117): warning C4715: 'Menu::Loop' : not all control paths return a value
+         Compiling...
+         Button.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\button.cpp(86): warning C4482: nonstandard extension used: enum 'sf::String::Style' used in qualified name
+         Block.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(38): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(39): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(40): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(41): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(43): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(44): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\block.cpp(46): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+         AmmoData.cpp
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(157): warning C4227: anachronism used : qualifiers on reference are ignored
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\resource.h(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\ammodata.cpp(134): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\ammodata.cpp(139): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\pjata\documents\visual studio 2010\projects\proba\proba\ammodata.cpp(139): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Generating Code...
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -67,4 +238,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.63
+Time Elapsed 00:00:42.18
