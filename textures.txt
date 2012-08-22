@@ -1,15 +1,13 @@
-block_grass.png
-block_lava.png
-block_normal.png
-block_random.png
-block_random2.png
-block_random3.png
-block_water.png
-lena.png
-block_proba.jpg
-block_spawn.png
-block_end.png
-proba.png
-box_texture.png
-box_texture.png
-box_texture.png
+block_grass.png BLOCK_GRASS
+block_lava.png BLOCK_LAVA
+block_normal.png BLOCK_NORMAL
+block_random.png BLOCK_RANDOM
+block_random2.png BLOCK_RANDOM2
+block_random3.png BLOCK_RANDOM3
+block_water.png BLOCK_WATER
+lena.png BLOCK_LENA
+block_proba.jpg BLOCK_PROBA
+block_spawn.png BLOCK_SPAWN
+block_end.png BLOCK_END
+proba.png PROBA
+box_texture.png BOX_TEXTURE

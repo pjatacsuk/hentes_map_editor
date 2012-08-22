@@ -37,7 +37,7 @@ public:
 	friend GatewayData;
 	
 
-	RectangleBlock(sf::Shape r,int type,TextureManager* textureManager,bool render_info=true);
+	RectangleBlock(sf::Shape r,int type,TextureManager* textureManager,bool render_info=true,bool ForEngineFlag=true);
 	RectangleBlock(std::string str,TextureManager* textureManager);
 	RectangleBlock(const RectangleBlock& );
 	RectangleBlock();

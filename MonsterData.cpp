@@ -24,7 +24,7 @@ std::string MonsterData::SerializeForEngine() {
 	os << rect_pos.x				<< " " <<			rect_pos.y		<< " ";				//x y
 	
 	//sprite kiírása
-	os << texture_names[parent->defType] << " ";
+	os << (*resource::globalTextureNames->instance())[parent->defType] << " ";
 	
 	//élet kiírása
 	os << attributes[HEALTH] << " ";

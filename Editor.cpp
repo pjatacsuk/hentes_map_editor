@@ -293,8 +293,9 @@ void Editor::UpdateMouse(sf::RenderWindow* target,sf::Event& Event,int& x,int& y
 						//release-nél van block hozzáadás
 						x = Event.MouseButton.X / resource::consts::BLOCK_SIZE;
 						y = Event.MouseButton.Y / resource::consts::BLOCK_SIZE;
-						mouse_button_pressed = true;
-						
+						if(actualButtonManager == NULL) {
+							mouse_button_pressed = true;
+						}
 					
 					break;
 				case sf::Mouse::Right:
@@ -341,8 +342,9 @@ void Editor::UpdateMouse(sf::RenderWindow* target,sf::Event& Event,int& x,int& y
 				}
 
 	}
-	if(mouse_button_pressed) UpdateSelectSprite(x,y);
-	
+	if(actualButtonManager == NULL) {
+		if(mouse_button_pressed) UpdateSelectSprite(x,y);
+	}
 
 	if(actualButtonManager != NULL ) {
 		actualButtonManager->UpdateOnMouseOver(sf::Vector2<float>(target->GetInput().GetMouseX() + offSet.x,
@@ -434,8 +436,8 @@ void Editor::UpdateSelectSprite(int x, int y) {
 
 		rect.AddPoint(LeftDown + offSet);
 		rect.AddPoint(RightDown + offSet);
-
-		select_rblock = new RectangleBlock(rect,block_type,textureManager);
+		if(select_rblock != NULL) delete select_rblock;
+		select_rblock = new RectangleBlock(rect,block_type,textureManager,false,false);
 		
 
 }

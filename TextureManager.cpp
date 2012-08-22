@@ -14,7 +14,7 @@ TextureManager::TextureManager(string source) {
 
 		int type = atoi(strtok(cstr," "));
 		cstr = strtok(NULL," "); */
-		is << "./data/images/" << str;
+		is << "./data/images/" << str.substr(0,str.find(" "));
 		Add(is.str());
 
 		//delete cstr;

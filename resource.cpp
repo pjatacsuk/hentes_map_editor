@@ -22,9 +22,9 @@ sf::Vector2<float> resource::function::Transform(int x, int y) {
 	return sf::Vector2<float>(x, (y - resource::consts::SCREEN_HEIGHT) * -1);
 }
 
-int resource::function::GetSpriteID(std:: string name) {
-	for(int i=0;i<resource::consts::MAX_TEXTURE;i++) {
-		if(texture_names[i] == name) {
+int resource::function::GetSpriteID(std::string name) {
+	for(int i=0;i<resource::globalTextureNames->instance()->size();i++) {
+		if((*resource::globalTextureNames->instance())[i] == name) {
 			return i;
 		}
 
@@ -60,3 +60,4 @@ void resource::objects::GlobalInfoManager::Reset() {
 resource::objects::GlobalTexture* resource::objects::GlobalTexture::s_instance;
 resource::objects::GlobalTextManager* resource::objects::GlobalTextManager::s_instance;
 resource::objects::GlobalInfoManager* resource::objects::GlobalInfoManager::s_instance;
+resource::objects::TextureNames*	resource::objects::TextureNames::s_instance;
