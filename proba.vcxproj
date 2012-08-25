@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -39,8 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>X:\SFML-1.6\include;$(IncludePath)</IncludePath>
-    <LibraryPath>X:\SFML-1.6\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>X:\Qt\4.8.2\include;X:\SFML-1.6\include;$(IncludePath)</IncludePath>
+    <LibraryPath>X:\Qt\4.8.2\lib;X:\SFML-1.6\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -54,12 +55,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;SFML_DYNAMIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_CORE_LIB;SFML_DYNAMIC;QT_GUI_LIB;QT_OPENGL_LIB</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtOpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;qtmaind.lib;QtCored4.lib;QtGuid4.lib;QtOpenGLd4.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,12 +96,18 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GatewayData.cpp" />
+    <ClCompile Include="graphics-qt.hpp" />
+    <ClCompile Include="imagedelegate.cpp" />
+    <ClCompile Include="imagemodel.cpp" />
     <ClCompile Include="InfoManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="moc_qt_proba2.cpp" />
     <ClCompile Include="MonsterData.cpp" />
     <ClCompile Include="PlatformData.cpp" />
+    <ClCompile Include="QSFMLCanvas.cpp" />
+    <ClCompile Include="qt_proba.cpp" />
     <ClCompile Include="RectangleBlock.cpp" />
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="SaveToEngine.cpp" />
@@ -121,12 +129,19 @@
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GatewayData.h" />
+    <ClInclude Include="imagedelegate.h" />
+    <ClInclude Include="imagemodel.h" />
     <ClInclude Include="InfoManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="moc_imagemodel.hpp" />
     <ClInclude Include="MonsterData.h" />
     <ClInclude Include="MyTimer.hpp" />
     <ClInclude Include="PlatformData.h" />
+    <ClInclude Include="QSFMLCanvas.hpp" />
+    <ClInclude Include="qt_proba.h" />
+    <ClInclude Include="qt_ui.h" />
+    <ClInclude Include="ui_qt_proba.h" />
     <ClInclude Include="RectangleBlock.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SaveToEngine.h" />
@@ -135,6 +150,7 @@
     <ClInclude Include="WeaponData.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="editor_ui.ui" />
     <None Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
