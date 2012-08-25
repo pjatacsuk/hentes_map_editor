@@ -12,19 +12,21 @@ Editor::Editor():
 offSet(0,0),
 block_type(NORMAL),
 _map(NULL),
-CTS(NULL),
 textureManager(NULL),
 actualButtonManager(NULL),
 mapName(std::string()),
 mouse_button_pressed(false),
-target(NULL)
+target(NULL),
+q_down(false),
+current_map(""),
+mouse_down(false)
 {
 	resource::globalInfoManager->instance()->Reset();
 
 	_map = new Map();
 	
 	actualButtonManager = NULL;
-	CTS = new CircularTextureSelect(textureManager,100);
+	//CTS = new CircularTextureSelect(textureManager,100);
 	bg_image = sf::Image();
 	bg_image.LoadFromFile("./data/images/bg.png");
 	bg_sprite = sf::Sprite(bg_image);
@@ -42,10 +44,12 @@ block_type(NORMAL),
 _map(NULL),
 actualButtonManager(NULL),
 textureManager(NULL),
-CTS(NULL),
 mapName(source),
 mouse_button_pressed(false),
-target(NULL)
+target(NULL),
+q_down(false),
+mouse_down(false),
+current_map("")
 {
 
 	resource::globalInfoManager->instance()->Reset();
@@ -59,11 +63,11 @@ target(NULL)
 	select_rblock = new RectangleBlock();
 	
 	_map = new Map(source,textureManager);
-	
+	current_map = source;
 
 
 	actualButtonManager = NULL;
-	CTS = new CircularTextureSelect(textureManager,100);
+	//CTS = new CircularTextureSelect(textureManager,100);
 	target = app;
 
 	resource::globalTextManager->instance()->SetRenderTarget(target);
@@ -75,7 +79,7 @@ target(NULL)
 Editor::~Editor() {
 	if(_map != NULL)				delete _map;
 	if(actualButtonManager != NULL) delete actualButtonManager;
-	if(CTS != NULL)					delete CTS;
+//	if(CTS != NULL)					delete CTS;
 	
 }
 
@@ -101,22 +105,23 @@ void Editor::Update() {
 																	  target->GetInput().GetMouseY(),
 																	  block_type);
 }
-void Editor::Loop() {
-	sf::Event Event;
-	int x,y;
-	bool q_down = false;
-	bool mouse_down = false;
-	SaveToEngine save_engine(mapName,_map);
-	while(running) {
-		while(target->GetEvent(Event)){
+bool Editor::Loop() {
+	
+	//kiválasztott block_type a Qt editorból
+	block_type = resource::bridgeToEditor->instance()->GetBlockType();
+	
+	sf::Event my_event;
+	
+//	while(running) {
+		while(target->GetEvent(my_event)){
 			
-			switch(Event.Type) {
+			switch(my_event.Type) {
 			case sf::Event::KeyPressed:
-				switch(Event.Key.Code) 
+				switch(my_event.Key.Code) 
 					{
 						case sf::Key::Escape:
 						
-							running = false;
+							return false;
 					
 							break;
 						case sf::Key::Numpad8:
@@ -142,10 +147,10 @@ void Editor::Loop() {
 							GotoLeft();
 							break;
 						case sf::Key::Up:
-							TextureSelectionsUP();
+					//		TextureSelectionsUP();
 							break;
 						case sf::Key::Down:
-							TextureSelectionsDOWN();
+					//		TextureSelectionsDOWN();
 							break;
 						case sf::Key::W:
 							offSet.y -= resource::consts::BLOCK_SIZE;
@@ -161,20 +166,21 @@ void Editor::Loop() {
 							offSet.x  += resource::consts::BLOCK_SIZE;
 							break;
 						case sf::Key::O:
-							save_engine.SaveStart();
+						//	save_engine = SaveToEngine(mapName,_map);
+						//	save_engine.SaveStart();
 							resource::globalTextManager->instance()->GetFontManager()->Add("Saved",3,sf::Vector2<float>(resource::consts::SCREEN_WIDTH/2-20,0));
 
 							
 							break;
 						case sf::Key::Q:
-							if(q_down != true) {										//texture választó megjelenítése
+					/*		if(q_down != true) {										//texture választó megjelenítése
 								q_down = true;
 								actualButtonManager = NULL;								//jobb click menü eltüntetése							
 								CTS->UpdatePosition(target->GetInput().GetMouseX(),
 								                    target->GetInput().GetMouseY());
 								CTS->_Active = true;
 							
-							}
+							}*/
 								break;
 						case sf::Key::X:												//törlés
 							sf::Vector2<float> mouse(target->GetInput().GetMouseX() + offSet.x,
@@ -186,30 +192,32 @@ void Editor::Loop() {
 					}
 					break;
 			case sf::Event::KeyReleased:
-				if(Event.Key.Code == sf::Key::Q) {
+		/*		if(my_event.Key.Code == sf::Key::Q) {
 					CTS->_Active = false;
 					q_down = false;
-				}
+				}*/
 				break;
 			}
 
-			UpdateMouse(target,Event,x,y);
-
+			UpdateMouse(target,my_event,mouse_x,mouse_y);
+			/* Qt EDITOR MIATT EZT SZÉPEN MEGY LEGACYBA
 			if(q_down) {
 				block_type = CTS->SelectTexture(target);
 			}
-			
+			*/
 			//Update procedura	
 			Update();
 		}
 
 		
 		Render();
-		if(q_down) {
+		/*if QT EDITOR MIATT MEGY LEGACYBA
+		(q_down) {
 			CTS->Render(target);
-		}
-		target->Display();
-	}
+		}*/
+		
+//	}
+		return true;
 }
 
 
@@ -335,9 +343,9 @@ void Editor::UpdateMouse(sf::RenderWindow* target,sf::Event& Event,int& x,int& y
 	} 
 	if(Event.Type == Event.MouseWheelMoved) {
 				if(Event.MouseWheel.Delta > 0) {
-					TextureSelectionsUP();
+				//	TextureSelectionsUP();
 				} else {
-					TextureSelectionsDOWN();
+					//TextureSelectionsDOWN();
 						
 				}
 
@@ -352,7 +360,7 @@ void Editor::UpdateMouse(sf::RenderWindow* target,sf::Event& Event,int& x,int& y
 	}			
 }
 
-
+/*
 void Editor::TextureSelectionsUP() {
 	if(CTS->_Active == false) {
 						block_type = (block_type + 1) % textureManager->Size();
@@ -376,7 +384,7 @@ void Editor::TextureSelectionsDOWN() {
 								target->GetInput().GetMouseY());
 					}
 }
-
+*/
 void Editor::GotoTopLeft() {
 	offSet =  (_map->GetTopLeft() + sf::Vector2<float>(0,_map->GetTop().y - _map->GetTopLeft().y));
 }

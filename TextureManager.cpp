@@ -48,11 +48,15 @@ void TextureManager::Add(std::string source) {
 	sf::Image image;
 	image.LoadFromFile(source);
 	Add(textures.size(),image);
+	
+	//itt már -1, hogy egyezzen a két index
+	texture_paths[textures.size()-1] = source;
 }
 
 void TextureManager::Add(int type,std::string source) {
 	sf::Image image;
 	image.LoadFromFile(source);
 	Add(textures.size(),image);
+	
 }
 

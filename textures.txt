@@ -7,7 +7,7 @@ block_random3.png BLOCK_RANDOM3
 block_water.png BLOCK_WATER
 lena.png BLOCK_LENA
 block_proba.jpg BLOCK_PROBA
-block_spawn.png BLOCK_SPAWN
-block_end.png BLOCK_END
+block_spawn.png SPAWNPLACE
+block_end.png ENDLEVELBUTTON
 proba.png PROBA
 box_texture.png BOX_TEXTURE

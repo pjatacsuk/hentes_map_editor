@@ -6,10 +6,15 @@ _map(map),
 mapname(output){
 
 }
+/*
+SaveToEngine::SaveToEngine()
+{
 
 
+}
+*/
 SaveToEngine::~SaveToEngine() {
-
+	//_map-al nem itt foglalkozunk
 }
 
 void SaveToEngine::SaveStart() {

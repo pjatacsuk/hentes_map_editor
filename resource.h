@@ -61,6 +61,33 @@ namespace resource {
 				return (*x) < (*y);
 			}
 		};
+
+		class BridgeToEditor {
+		private:
+			static	BridgeToEditor* s_instance;
+			int						block_type;
+			BridgeToEditor():
+			block_type(0)
+			{
+				
+
+			}
+		public:
+			
+			static	BridgeToEditor*			instance() {
+				if(s_instance == NULL) {
+					s_instance = new BridgeToEditor();
+				}
+				return s_instance;
+			}
+			void SetBlockType(int i) {
+				block_type = i;
+			}
+			int GetBlockType() {
+				return block_type;
+			}
+
+		};
 		class GlobalTexture {
 		private:
 			TextureManager* myTextureManager;
@@ -177,6 +204,7 @@ namespace resource {
 	static resource::objects::GlobalTextManager* globalTextManager = NULL;
 	static resource::objects::GlobalInfoManager* globalInfoManager = NULL;
 	static resource::objects::TextureNames*		globalTextureNames = NULL;
+	static resource::objects::BridgeToEditor*	bridgeToEditor	   = NULL;
 #endif
 
 

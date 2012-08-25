@@ -3,14 +3,17 @@
 #include "resource.h"
 #include "Editor.h"
 #include "Menu.h"
-Game::Game():
+Game::Game(QWidget* Parent, const QPoint& Position, const QSize& Size) :
+QSFMLCanvas(Parent, Position, Size),
 running(true),
 game_status(MENU),
 App(NULL),
 map(NULL),
-textureManager(NULL)
+textureManager(NULL),
+editor(NULL)
 {
-	Init_Game();
+	
+	menu = new Menu(this);
 	
 	
 }
@@ -18,26 +21,28 @@ Game::~Game() {
 	App->Close();
 	delete map;
 	delete textureManager;
+	delete menu;
+	delete editor;
 }
 
-void Game::Init_Game() {
-	App = new sf::RenderWindow(sf::VideoMode(resource::consts::SCREEN_WIDTH,
+void Game::OnInit() {
+	/*App = new sf::RenderWindow(sf::VideoMode(resource::consts::SCREEN_WIDTH,
 								resource::consts::SCREEN_HEIGHT),"SFML");
-	
+	*/
 	textureManager = new TextureManager("./textures.txt");
 }
 
 void Game::GameMenu() {
-	Menu* menu = new Menu(App);
 	map_path = menu->Loop();
-	game_status = EDITOR;
-	delete menu;
+	if(map_path != "")	game_status = EDITOR;
+	
 	
 
 
 }
-void Game::GameLoop() {
-	while(running) {
+void Game::OnUpdate() {
+//	while(running) {
+	Clear();
 		switch(game_status) {
 		case MENU:
 			GameMenu();
@@ -46,7 +51,7 @@ void Game::GameLoop() {
 			GameEditor();
 			break;
 		}
-	}
+//	}
 }
 
 
@@ -54,8 +59,17 @@ void Game::GameLoop() {
 
 
 void Game::GameEditor() {
-	Editor* editor = new Editor(map_path,textureManager,App);
-	editor->Loop();
-	game_status = MENU;
-	delete editor;
+	if(editor == NULL) {
+		editor = new Editor(map_path,textureManager,this);
+	}
+	if(map_path != editor->GetCurrentMap()) {
+		delete editor;
+		editor = new Editor(map_path,textureManager,this);
+	}
+	
+	if(editor->Loop() == false)	{
+		game_status = MENU;
+		map_path = "";
+	}
+	
 }

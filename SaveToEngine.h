@@ -14,6 +14,7 @@ private:
 	Map*		_map;
 public:
 	SaveToEngine(std::string output,Map*);
+//	SaveToEngine();
 	~SaveToEngine();
 
 	void SaveStart();

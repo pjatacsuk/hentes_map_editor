@@ -61,3 +61,4 @@ resource::objects::GlobalTexture* resource::objects::GlobalTexture::s_instance;
 resource::objects::GlobalTextManager* resource::objects::GlobalTextManager::s_instance;
 resource::objects::GlobalInfoManager* resource::objects::GlobalInfoManager::s_instance;
 resource::objects::TextureNames*	resource::objects::TextureNames::s_instance;
+resource::objects::BridgeToEditor*	resource::objects::BridgeToEditor::s_instance;

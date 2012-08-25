@@ -88,9 +88,9 @@ Menu::~Menu() {
 
 std::string Menu::Loop() {
 	sf::Event my_event;
-	bool running = true;
+//	bool running = true;
 	std::string ret;
-	while(running) {
+//	while(running) {
 	while(target->GetEvent(my_event)) {
 		switch(my_event.Type) {
 		case sf::Event::KeyPressed: 
@@ -111,9 +111,9 @@ std::string Menu::Loop() {
 	}
 	Update();
 	Render();
-	target->Display();
-	}
-	
+	//target->Display();
+//	}
+	return "";
 }
 
 void Menu::Update() {
@@ -123,7 +123,7 @@ void Menu::Update() {
 void Menu::Render() {
 	
 	
-	target->Clear();
+//	target->Clear();
 	int i=0;
 	for(EntityManagerTypes::iterator it = rblocks->begin();it != rblocks->end();it++) {
 		(*it)->Render(target,resource::globalTexture->instance()->GetTextureManager(),sf::Vector2<float>(0,0));

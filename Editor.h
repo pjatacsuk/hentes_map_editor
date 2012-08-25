@@ -1,9 +1,14 @@
+
+#ifndef INC_EDITOR_H
+#define INC_EDITOR_H
+
 #include <vector>
 #include "Block.h"
 #include "Map.h"
 #include <string>
 #include "TextureManager.h"
 #include "RectangleBlock.h"
+#include "SaveToEngine.h"
 #include "ButtonManager.h"
 #include "CircularTextureSelect.h"
 using namespace std;
@@ -25,24 +30,31 @@ private:
   
   bool						mouse_button_pressed;
   
-  CircularTextureSelect*	CTS;
+ // CircularTextureSelect*	CTS;
   ButtonManager*			actualButtonManager;
   TextureManager*			textureManager;
   sf::RenderWindow*			target;
+  int						mouse_x,mouse_y;
+  bool						q_down;
+  bool						mouse_down;
+  std::string				current_map;
+ // SaveToEngine				save_engine;
+
+  
   
 public:
   Editor();
   Editor(std::string source,TextureManager* tman,sf::RenderWindow* app);
   ~Editor();
-  void			Loop();
+  bool			Loop();
   void			Update();
   void			Render();
 
   void			RenderInfo();
 
   void			Save(std::string output);
-  void			TextureSelectionsUP();
-  void			TextureSelectionsDOWN();
+ // void			TextureSelectionsUP();
+ // void			TextureSelectionsDOWN();
   
 
   void			AddLineOfBlock(int& x,int& y,int& n_x,int& n_y);
@@ -58,4 +70,8 @@ public:
   void			GotoRight();
   void			GotoTop();
   void			GotoBottom();
+
+  inline		void SetBlockType(int i) {block_type = i;}
+  inline		std::string GetCurrentMap() {return current_map;}
 };
+#endif
